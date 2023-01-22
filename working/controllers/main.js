@@ -1,5 +1,6 @@
 async function login (req, res) {
-    res.send("Fake login/register/signup")
+    const { username, password } = req.body;
+    res.send(`Fake login/register/signup for user ${username} with password ${password}` );
 }
 
 async function dashboard (req, res) {
