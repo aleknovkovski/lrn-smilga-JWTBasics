@@ -22,6 +22,15 @@ async function dashboard (req, res) {
         throw new customAPIError('please provide an access token', 401)
     }
 
+    const token = authHeader.split(' ')[1]
+
+    try {
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+        console.log(decodedToken)
+    } catch (err) {
+        throw new customAPIError('Not authorized to access this route', 401)
+    }
+
     const luckyNumber = Math.floor(Math.random() * 100)
 
     res.status(200).json({
