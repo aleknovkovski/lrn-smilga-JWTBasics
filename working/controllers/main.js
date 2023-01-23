@@ -16,6 +16,12 @@ async function login (req, res) {
 }
 
 async function dashboard (req, res) {
+    const authHeader = req.headers.authorization;
+
+    if(!authHeader || !authHeader.startsWith('Bearer ')) {
+        throw new customAPIError('please provide an access token', 401)
+    }
+
     const luckyNumber = Math.floor(Math.random() * 100)
 
     res.status(200).json({
